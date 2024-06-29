@@ -48,9 +48,34 @@ export const baseApi = createApi({
 
             invalidatesTags: ['todo'],
         }),
+
+        updateFullTodos: builder.mutation({
+            query: (data) => {
+                console.log('Inside base api',data);
+                return {
+                    url: `/task/${data.id}`,
+                method: 'PUT',
+               body: data,
+                }
+            },
+
+            invalidatesTags: ['todo'],
+        }),
+
+        removeTodos: builder.mutation({
+            query: (id) => {
+                console.log('Inside base api',id);
+                return {
+                    url: `/task/${id}`,
+                method: 'DELETE',
+            //    body: data,
+                }
+            },
+            invalidatesTags: ['todo'],
+        }),
     }),
 
 });
 
 
-export const {useGetTodosQuery, useAddTodosMutation,useUpdateTodosMutation} = baseApi;
+export const {useGetTodosQuery, useAddTodosMutation,useUpdateTodosMutation, useRemoveTodosMutation, useUpdateFullTodosMutation} = baseApi;
